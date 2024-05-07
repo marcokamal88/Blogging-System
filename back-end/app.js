@@ -34,10 +34,10 @@ app.put("/update_posts/:id", MW.verifyToken, postsController.updatePost);
 
 app.post("/save_posts/:id", MW.verifyToken, postsController.savePost);
 
-app.get("/saved-posts", MW.verifyToken, postsController.getSavedPosts);
+app.get("/saved_posts", MW.verifyToken, postsController.getSavedPosts);
 
 app.delete(
-  "/delete-saved-posts/:id",
+  "/delete_saved_posts/:id",
   MW.verifyToken,
   postsController.deleteSavedPost
 );

@@ -2,7 +2,8 @@ import Login from "./pages/login/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/register/Register";
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Timeline";
+import SavedPosts from "./pages/Home/SavedPosts";
 import ProtectedRoute from "./ProtectedRout";
 import NoPage from "./pages/NoPage";
 
@@ -34,6 +35,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/saved-posts"
+              element={
+                <ProtectedRoute>
+                  <SavedPosts />
                 </ProtectedRoute>
               }
             />

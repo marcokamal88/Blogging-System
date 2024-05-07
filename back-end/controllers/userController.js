@@ -50,7 +50,7 @@ const login = async (req, res) => {
         },
         process.env.SECRET_KEY,
         {
-          expiresIn: "1h",
+          expiresIn: "10h",
         }
       );
       return res.status(200).json(token);

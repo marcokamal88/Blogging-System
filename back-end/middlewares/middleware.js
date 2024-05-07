@@ -1,13 +1,17 @@
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
-
+  console.log("-----------------"+bearerHeader);
   if (bearerHeader) {
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
-    jwt.verify(bearerToken, process.env.SECRET_KEY, (err, user) => {
-      if (err) return res.status(403).send("there is some error :(");
+    console.log(bearer[1]);
+    console.log(typeof process.env.SECRET_KEY)
+    jwt.verify(bearerToken, process.env.SECRET_KEY, function(err, user){
+      console.log(user+" "+err)
+      if (err) return res.status(403).send("token cannot be verified :(");
       res.id = user.id;
       next();
     });

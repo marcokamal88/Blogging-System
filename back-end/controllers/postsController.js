@@ -2,10 +2,11 @@ require("dotenv").config();
 const { users, posts, UserSavedPost } = require("../models");
 
 const timeline = async (req, res) => {
-  const query = req.query;
+  const query = req.params;
   limit = query.limit || 5;
   page = query.page || 1;
   offset = (page - 1) * limit;
+  console.log(limit + " " + page);
   try {
     const myposts = await posts.findAll({ include: "users", limit, offset });
     return res.json(myposts);

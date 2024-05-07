@@ -1,0 +1,75 @@
+/* Style for the container holding all the posts */
+*{
+  margin: 0;
+  box-sizing: 0;
+}
+.post-container {
+    position: relative; /* Enable positioning */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    background-color: #fff;
+  }
+  
+  /* Style for the user name */
+  .user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Style for the post title */
+  .post-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Style for the post category */
+  .post-category {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  /* Style for the post content */
+  .post-content {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Style for the cover image */
+  .post-content img {
+    max-width: 400px; /* Adjust this value to make the image smaller */
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .save-post {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+  }
+
+  .save-post button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .save-post button:hover {
+    background-color: #0056b3;
+  }
+  
+  .save-post button:focus {
+    outline: none;
+  }
