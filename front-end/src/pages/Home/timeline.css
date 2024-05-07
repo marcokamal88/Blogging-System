@@ -1,26 +1,26 @@
-/* Style for the container holding all the posts */
+
 *{
   margin: 0;
   box-sizing: 0;
 }
 .post-container {
-    position: relative; /* Enable positioning */
+    position: relative; 
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    /* margin-top: 20px; */
+    
     background-color: #fff;
   }
   
-  /* Style for the user name */
+
   .user-name {
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
   }
   
-  /* Style for the post title */
+ 
   .post-title {
     font-size: 1.5em;
     font-weight: bold;
@@ -28,22 +28,22 @@
     color: #333;
   }
   
-  /* Style for the post category */
+  
   .post-category {
     font-style: italic;
     margin-bottom: 10px;
     color: #666;
   }
   
-  /* Style for the post content */
+ 
   .post-content {
     margin-bottom: 10px;
     color: #333;
   }
   
-  /* Style for the cover image */
+ 
   .post-content img {
-    max-width: 400px; /* Adjust this value to make the image smaller */
+    max-width: 400px; 
     height: auto;
     display: block;
     margin: 10px 0;
@@ -53,8 +53,8 @@
 
   .save-post {
     position: absolute;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
+    top: 10px; 
+    right: 10px; 
   }
 
   .save-post button {
