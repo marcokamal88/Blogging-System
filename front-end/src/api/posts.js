@@ -1,14 +1,17 @@
-import {myAxios} from "./myAxios"
+import { myAxios } from "./myAxios";
 export function timeline(config) {
-    return myAxios.get("http://localhost:5000/timeline",config)
-}
-export function savePost(headers,id) {
-    return myAxios.post(`http://localhost:5000/save_posts/${id}`,{},{headers:headers})
-}
-export function savedPosts(config) {
-    return myAxios.get("http://localhost:5000/saved_posts",config)
-}
-export function deleteSavedPost(headers,id) {
-    return myAxios.delete(`http://localhost:5000/delete_saved_posts/${id}`,{headers:headers})
+  return myAxios.get("/timeline", config);
 }
 
+export function createPost(data) {
+    return myAxios.post("/create_posts",data)
+}
+export function savePost(id) {
+  return myAxios.post(`/save_posts/${id}`);
+}
+export function savedPosts(config) {
+  return myAxios.get("/saved_posts", config);
+}
+export function deleteSavedPost(id) {
+  return myAxios.delete(`/delete_saved_posts/${id}`);
+}

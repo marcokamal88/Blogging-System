@@ -3,18 +3,17 @@ import { savePost, timeline } from "../../api/posts";
 // import pic from "../images/testImg.png";
 import "./timeline.css";
 import Header from "./Header";
+import PageContent from "./PageContent";
 let config = {
-  headers: {
-    authorization: "Bearer " + localStorage.getItem("token"),
-  },
   params: {
     page: 1,
-    limit: 5,
+    limit: 2,
   },
 };
 console.log(config);
 const Home = () => {
   const [timelineData, setTimeLineData] = useState([]);
+  const [response, setResponse] = useState(null);
   useEffect(() => {
     timeline(config)
       .then((res) => {
@@ -25,39 +24,28 @@ const Home = () => {
   }, []);
 
   const handleSavePost = (id) => {
-    console.log(config);
-
-    savePost(config.headers, id)
+    savePost(id)
       .then((res) => {
-        console.log(res);
+        // console.log(res.data);
+        setResponse(res.data);
       })
-      .catch((err) => console.log(err.response.data.error));
+      .catch((err) => {
+        // console.log(err.response.data.error);
+        setResponse(err.response.data.error);
+      });
   };
 
   return (
     <>
-      <Header /><br></br>
-      <div>
-        {timelineData.map((post) => (
-          <div key={post.id} className="post-container">
-            <div className="user-name">name</div>
-            <div className="post-title">{post.title}</div>
-            <div className="post-category">{post.multiple_categories}</div>
-            <div className="post-content">{post.content}</div>
-            <div className="post-content">{post.summary}</div>
-            <div className="post-content">
-              <img src={post.cover_image} alt="post cover" />
-            </div>
-            <div className="save-post">
-              <button type="submit" onClick={() => handleSavePost(post.id)}>
-                save post
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Header />
+      <br></br>
+      <PageContent
+        Data={timelineData}
+        handler={handleSavePost}
+        buttom="save post"
+        response={response}
+      />
     </>
   );
 };
 export default Home;
-// {post.cover_image}

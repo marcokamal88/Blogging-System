@@ -6,6 +6,7 @@ import Home from "./pages/Home/Timeline";
 import SavedPosts from "./pages/Home/SavedPosts";
 import ProtectedRoute from "./ProtectedRout";
 import NoPage from "./pages/NoPage";
+import CreatePost from "./pages/Home/CreatePost";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <SavedPosts />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-post"
+              element={
+                <ProtectedRoute>
+                  <CreatePost />
                 </ProtectedRoute>
               }
             />

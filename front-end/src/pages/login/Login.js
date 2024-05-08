@@ -76,7 +76,7 @@ const Login = () => {
               Login
             </button>
           </div>
-            <Link to="/">Craet a new account</Link>
+          <Link to="/">Craet a new account</Link>
         </div>
       </form>
     </>

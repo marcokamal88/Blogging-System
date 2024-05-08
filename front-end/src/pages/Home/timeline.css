@@ -73,3 +73,11 @@
   .save-post button:focus {
     outline: none;
   }
+  .no_posts {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #333; /* Dark gray color */
+    text-align: center;
+    margin-top: 50px; /* Adjust as needed */
+  }
+  
