@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { savePost, timeline } from "../../api/posts";
-// import pic from "../images/testImg.png";
 import "./timeline.css";
 import Header from "./Header";
 import PageContent from "./PageContent";
@@ -28,10 +27,12 @@ const Home = () => {
       .then((res) => {
         // console.log(res.data);
         setResponse(res.data);
+        setTimeout(() => setResponse(null), 3000);
       })
       .catch((err) => {
         // console.log(err.response.data.error);
         setResponse(err.response.data.error);
+        setTimeout(() => setResponse(null), 3000);
       });
   };
 

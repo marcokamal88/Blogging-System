@@ -1,5 +1,7 @@
 const express = require("express");
 require("dotenv").config();
+const multer = require("multer");
+const path = require("path");
 const cors = require("cors");
 const usersController = require("./controllers/userController");
 const postsController = require("./controllers/postsController");
@@ -23,10 +25,19 @@ app.get("/show_all_users", usersController.getAllUsers);
 
 app.get("/show_users/:id", MW.verifyToken, usersController.getUser);
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));
+//   },
+// });
+// const upload = multer({ storage: storage });
+
 app.post("/create_posts", MW.verifyToken, postsController.createPost);
 
 // get posts
 app.get("/timeline", MW.verifyToken, postsController.timeline);
+
+app.get("/my_posts/:userId", MW.verifyToken, postsController.getMyPosts);
 
 app.delete("/delete_posts/:id", MW.verifyToken, postsController.deletePost);
 

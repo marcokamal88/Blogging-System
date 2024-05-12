@@ -7,6 +7,7 @@ import SavedPosts from "./pages/Home/SavedPosts";
 import ProtectedRoute from "./ProtectedRout";
 import NoPage from "./pages/NoPage";
 import CreatePost from "./pages/Home/CreatePost";
+import UserPosts from "./pages/Home/UserPosts";
 
 function App() {
   return (
@@ -52,6 +53,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CreatePost />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user-posts"
+              element={
+                <ProtectedRoute>
+                  <UserPosts />
                 </ProtectedRoute>
               }
             />

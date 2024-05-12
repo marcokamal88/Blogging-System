@@ -1,30 +1,26 @@
 import { useEffect, useState } from "react";
-import { deleteSavedPost, savedPosts } from "../../api/posts";
-import PageContent from "./PageContent";
-import "./timeline.css";
 import Header from "./Header";
+import PageContent from "./PageContent";
+import { deletePosts, getUserPosts } from "../../api/posts";
 let config = {
   params: {
     page: 1,
     limit: 2,
   },
 };
-console.log(config);
-const SavedPosts = () => {
-  const [savedPostsData, setSavedPosts] = useState([]);
+const UserPosts = () => {
+  const [userPostsData, setUserPostsData] = useState([]);
   const [response, setResponse] = useState(null);
-
   useEffect(() => {
-    savedPosts(config)
+    getUserPosts(config)
       .then((res) => {
-        console.log(res.data);
-        setSavedPosts(res.data);
+        // console.log(res.data);
+        setUserPostsData(res.data);
       })
       .catch((err) => console.log(err.response.data.error));
   }, []);
-
-  const handleUnSavePost = (id) => {
-    deleteSavedPost(id)
+  const handleDeletePost = (id) => {
+    deletePosts(id)
       .then((res) => {
         // console.log(res.data);
         setResponse(res.data);
@@ -36,18 +32,17 @@ const SavedPosts = () => {
         setTimeout(() => setResponse(null), 3000);
       });
   };
-
   return (
     <>
       <Header />
       <br></br>
       <PageContent
-        Data={savedPostsData}
-        handler={handleUnSavePost}
-        buttom="unsave post"
+        Data={userPostsData}
+        handler={handleDeletePost}
+        buttom="delete post"
         response={response}
       />
     </>
   );
 };
-export default SavedPosts;
+export default UserPosts;

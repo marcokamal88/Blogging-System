@@ -9,6 +9,9 @@ const Header = () => {
             <Link to="/Home">Timeline</Link>
           </li>
           <li>
+            <Link to="/user-posts">my posts</Link>
+          </li>
+          <li>
             <Link to="/saved-posts">Show Saved Posts</Link>
           </li>
           <li>

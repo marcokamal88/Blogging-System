@@ -17,6 +17,22 @@ const timeline = async (req, res) => {
   }
 };
 
+const getMyPosts = async (req, res) => {
+  const query = req.params;
+  const userId = res.id;
+  console.log("----"+userId);
+  limit = query.limit || 10;
+  page = query.page || 1;
+  offset = (page - 1) * limit;
+  try {
+    const myPosts = await posts.findAll({ where: { userId }, limit, offset });
+    return res.json(myPosts);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 const createPost = async (req, res) => {
   const { title, cover_image, summary, multiple_categories, content } =
     req.body;
@@ -141,7 +157,7 @@ const deleteSavedPost = async (req, res) => {
       return res.status(404).json({ error: "id not found" });
     }
     await UserSavedPost.destroy({ where: { postId: myPost.id } });
-    return res.status(200).json("post deleted successfully");
+    return res.status(200).json("post unsaved successfully");
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Something went wrong" });
@@ -149,6 +165,7 @@ const deleteSavedPost = async (req, res) => {
 };
 module.exports = {
   timeline,
+  getMyPosts,
   createPost,
   deletePost,
   updatePost,
