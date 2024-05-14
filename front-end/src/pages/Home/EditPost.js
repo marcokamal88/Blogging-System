@@ -1,10 +1,14 @@
-import { createPost } from "../../api/posts";
+import "./createPost.css";
+import { updatePosts } from "../../api/posts";
 import Header from "./Header";
 import { useFormik } from "formik";
-import "./createPost.css";
 import { useState } from "react";
-const CreatePost = () => {
+import { useContext } from "react";
+import MyContext from "./Context";
+
+const EditPost = () => {
   const [response, setResponse] = useState(null);
+  const { Id } = useContext(MyContext);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -21,7 +25,9 @@ const CreatePost = () => {
       formData.append("cover_image", values.cover_image);
       formData.append("summary", values.summary);
       formData.append("multiple_categories", values.multiple_categories);
-      createPost(formData, {
+      console.log(values);
+
+      updatePosts(Id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -34,16 +40,18 @@ const CreatePost = () => {
           // console.log(err.response.data.error);
           setResponse(err.response.data.error);
         });
+
       setSubmitting(false);
     },
   });
+
   return (
     <>
       <Header />
       <br></br>
       <form className="create-post" onSubmit={formik.handleSubmit}>
         <div className="container">
-          <h1>Create a new post</h1>
+          <h1>Edit post</h1>
           <div className="title">
             <label>Title</label>
             <input
@@ -96,7 +104,7 @@ const CreatePost = () => {
             />
             {formik.values.cover_image && (
               <img
-              className="preview"
+                className="preview"
                 src={URL.createObjectURL(formik.values.cover_image)}
                 alt="Cover"
               />
@@ -109,7 +117,7 @@ const CreatePost = () => {
               type="submit"
               disabled={formik.isSubmitting}
             >
-              Create
+              Update
             </button>
           </div>
         </div>
@@ -117,4 +125,4 @@ const CreatePost = () => {
     </>
   );
 };
-export default CreatePost;
+export default EditPost;

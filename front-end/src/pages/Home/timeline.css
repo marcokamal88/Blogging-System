@@ -36,7 +36,7 @@
   color: #333;
 }
 
-.post-content img {
+.post-img img {
   max-width: 400px;
   height: auto;
   display: block;
@@ -45,26 +45,28 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.save-post {
+.button {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.save-post button {
+.button button {
   background-color: #007bff;
   color: #fff;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
-.save-post button:hover {
+.button button:hover {
   background-color: #0056b3;
 }
-
-.save-post button:focus {
+.button button:focus {
   outline: none;
 }
 .no_posts {
@@ -84,7 +86,6 @@
   background-color: #858687;
   }
 }
-
 .respons {
   background-color: #858687;
   color: #ffffff;

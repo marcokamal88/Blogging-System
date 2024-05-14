@@ -60,7 +60,7 @@ const Login = () => {
             <label>Password </label>
             <input
               className="password inpt"
-              type="text"
+              type="password"
               id="password"
               name="Password"
               placeholder="Enter password"

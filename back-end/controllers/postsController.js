@@ -1,4 +1,5 @@
 require("dotenv").config();
+// const path = require("path");
 const { users, posts, UserSavedPost } = require("../models");
 
 const timeline = async (req, res) => {
@@ -9,7 +10,11 @@ const timeline = async (req, res) => {
   offset = (page - 1) * limit;
   // console.log(limit + " " + page);
   try {
-    const myposts = await posts.findAll({ include: "users", limit, offset });
+    const myposts = await posts.findAll({
+      include: users,
+      limit,
+      offset,
+    });
     return res.json(myposts);
   } catch (error) {
     console.log(error);
@@ -20,12 +25,17 @@ const timeline = async (req, res) => {
 const getMyPosts = async (req, res) => {
   const query = req.params;
   const userId = res.id;
-  console.log("----"+userId);
+  console.log("----" + userId);
   limit = query.limit || 10;
   page = query.page || 1;
   offset = (page - 1) * limit;
   try {
-    const myPosts = await posts.findAll({ where: { userId }, limit, offset });
+    const myPosts = await posts.findAll({
+      include: users,
+      where: { userId },
+      limit,
+      offset,
+    });
     return res.json(myPosts);
   } catch (error) {
     console.log(error);
@@ -34,8 +44,8 @@ const getMyPosts = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { title, cover_image, summary, multiple_categories, content } =
-    req.body;
+  const { title, summary, multiple_categories, content } = req.body;
+  const cover_image = req.file.path;
   const userId = res.id;
   try {
     const myuser = await users.findOne({ where: { id: userId } });
@@ -79,15 +89,9 @@ const updatePost = async (req, res) => {
     if (!post) {
       return res.status(404).json({ error: "post not found" });
     }
-    const {
-      title,
-      cover_image,
-      summary,
-      multiple_categories,
-      content,
-      userId,
-    } = req.body;
-
+    const { title, summary, multiple_categories, content } = req.body;
+    const cover_image = req.file.path;
+    console.log(cover_image)
     await posts.update(
       {
         title,
@@ -95,7 +99,6 @@ const updatePost = async (req, res) => {
         summary,
         multiple_categories,
         content,
-        userId,
       },
       { where: { id } }
     );
@@ -135,6 +138,7 @@ const getSavedPosts = async (req, res) => {
     if (savedPosts) {
       const postIds = savedPosts.map((savedPost) => savedPost.postId);
       const Posts = await posts.findAll({
+        include: users,
         where: {
           id: postIds,
         },

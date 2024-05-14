@@ -43,7 +43,7 @@ const SavedPosts = () => {
       <br></br>
       <PageContent
         Data={savedPostsData}
-        handler={handleUnSavePost}
+        handler={[handleUnSavePost]}
         buttom="unsave post"
         response={response}
       />

@@ -42,7 +42,7 @@ const Home = () => {
       <br></br>
       <PageContent
         Data={timelineData}
-        handler={handleSavePost}
+        handler={[handleSavePost]}
         buttom="save post"
         response={response}
       />

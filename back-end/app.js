@@ -9,6 +9,7 @@ const MW = require("./middlewares/middleware");
 const { sequelize } = require("./models");
 
 const app = express();
+app.use("/images", express.static(__dirname + "/Images"));
 app.use(express.json());
 app.use(
   cors({
@@ -25,14 +26,21 @@ app.get("/show_all_users", usersController.getAllUsers);
 
 app.get("/show_users/:id", MW.verifyToken, usersController.getUser);
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
-// const upload = multer({ storage: storage });
-
-app.post("/create_posts", MW.verifyToken, postsController.createPost);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./images"); // Folder where images will be stored
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+  },
+});
+const upload = multer({ storage: storage });
+app.post(
+  "/create_posts",
+  MW.verifyToken,
+  upload.single("cover_image"),
+  postsController.createPost
+);
 
 // get posts
 app.get("/timeline", MW.verifyToken, postsController.timeline);
@@ -41,7 +49,12 @@ app.get("/my_posts/:userId", MW.verifyToken, postsController.getMyPosts);
 
 app.delete("/delete_posts/:id", MW.verifyToken, postsController.deletePost);
 
-app.put("/update_posts/:id", MW.verifyToken, postsController.updatePost);
+app.put(
+  "/update_posts/:id",
+  MW.verifyToken,
+  upload.single("cover_image"),
+  postsController.updatePost
+);
 
 app.post("/save_posts/:id", MW.verifyToken, postsController.savePost);
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import PageContent from "./PageContent";
-import { deletePosts, getUserPosts } from "../../api/posts";
+import { deletePosts, getUserPosts} from "../../api/posts";
+import { useNavigate } from "react-router-dom";
 let config = {
   params: {
     page: 1,
@@ -32,15 +33,21 @@ const UserPosts = () => {
         setTimeout(() => setResponse(null), 3000);
       });
   };
+  const nav = useNavigate();
+  const handleEditPost = (id) => {
+    nav("/Edid-post");
+  };
+  // const buttons = ["Edit post", "Delete post"];
   return (
     <>
       <Header />
       <br></br>
       <PageContent
         Data={userPostsData}
-        handler={handleDeletePost}
-        buttom="delete post"
+        handler={[handleDeletePost,handleEditPost]}
+        buttom="Delete post"
         response={response}
+        editPost={true}
       />
     </>
   );
