@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { where } = require("sequelize");
 // const path = require("path");
 const { users, posts, UserSavedPost } = require("../models");
 
@@ -45,7 +46,10 @@ const getMyPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
   const { title, summary, multiple_categories, content } = req.body;
-  const cover_image = req.file.path;
+  let cover_image = "";
+  if (!req.file) {
+    cover_image = "";
+  } else cover_image = req.file.path;
   const userId = res.id;
   try {
     const myuser = await users.findOne({ where: { id: userId } });
@@ -82,6 +86,18 @@ const deletePost = async (req, res) => {
   }
 };
 
+const getOnePost = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const mypost = await posts.findOne({ where: { id } });
+    console.log(mypost);
+    return res.json(mypost);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 const updatePost = async (req, res) => {
   try {
     const id = req.params.id;
@@ -90,8 +106,11 @@ const updatePost = async (req, res) => {
       return res.status(404).json({ error: "post not found" });
     }
     const { title, summary, multiple_categories, content } = req.body;
-    const cover_image = req.file.path;
-    console.log(cover_image)
+    let cover_image;
+    if (!req.file) {
+      cover_image = null;
+    } else cover_image = req.file.path;
+    console.log(cover_image);
     await posts.update(
       {
         title,
@@ -170,6 +189,7 @@ const deleteSavedPost = async (req, res) => {
 module.exports = {
   timeline,
   getMyPosts,
+  getOnePost,
   createPost,
   deletePost,
   updatePost,

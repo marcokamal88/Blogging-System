@@ -2,6 +2,7 @@
   margin: 0;
   box-sizing: 0;
 }
+
 .timeline-header {
   background-color: #007bff;
   color: #fff;
@@ -13,6 +14,7 @@
   width: 100%;
   z-index: 1000;
 }
+
 .timeline-nav ul {
   list-style-type: none;
   padding: 0;
@@ -36,4 +38,27 @@
 
 .timeline-nav a:hover {
   text-decoration: underline;
+}
+
+.timeline-nav button {
+  font-weight: bold;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.timeline-nav button:hover {
+  background-color: #0056b3;
 }

@@ -5,6 +5,9 @@ export function timeline(config) {
 export function getUserPosts(id, config) {
   return myAxios.get(`/my_posts/${id}`, config);
 }
+export function getOnePost(id, config) {
+  return myAxios.get(`/posts/${id}`);
+}
 export function updatePosts(id, data, config) {
   return myAxios.put(`/update_posts/${id}`, data, config);
 }

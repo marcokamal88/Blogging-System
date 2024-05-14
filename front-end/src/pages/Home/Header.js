@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 const Header = () => {
+  const nav = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    nav("/Login");
+  };
   return (
     <header class="timeline-header">
       <nav class="timeline-nav">
@@ -18,6 +23,9 @@ const Header = () => {
             <Link to="/create-post">Create post</Link>
           </li>
         </ul>
+        <div>
+          <button onClick={handleLogOut}>Logout</button>
+        </div>
       </nav>
     </header>
   );

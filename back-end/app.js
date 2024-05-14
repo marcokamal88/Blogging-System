@@ -46,6 +46,7 @@ app.post(
 app.get("/timeline", MW.verifyToken, postsController.timeline);
 
 app.get("/my_posts/:userId", MW.verifyToken, postsController.getMyPosts);
+app.get("/posts/:id", MW.verifyToken, postsController.getOnePost);
 
 app.delete("/delete_posts/:id", MW.verifyToken, postsController.deletePost);
 
